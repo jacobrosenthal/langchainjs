@@ -15,6 +15,8 @@ export type MemoryVariables = Record<string, any>;
 export abstract class BaseMemory {
   abstract loadMemoryVariables(values: InputValues): Promise<MemoryVariables>;
 
+  abstract memoryVariables(): string[];
+
   abstract saveContext(
     inputValues: InputValues,
     outputValues: OutputValues

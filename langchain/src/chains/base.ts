@@ -95,7 +95,14 @@ export abstract class BaseChain implements ChainInputs {
     // TODO(sean) add callback support
     const outputValues = await this._call(fullValues);
     if (!(this.memory == null)) {
-      await this.memory.saveContext(values, outputValues);
+      // todo agent_scratchpad should already have been filtered
+      delete fullValues.agent_scratchpad;
+
+      for (const key of [...this.memory.memoryVariables(), "stop"]) {
+        delete fullValues[`${key}`];
+      }
+
+      await this.memory.saveContext(fullValues, outputValues);
     }
     return outputValues;
   }

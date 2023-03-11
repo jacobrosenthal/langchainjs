@@ -29,6 +29,10 @@ export class BufferWindowMemory
     this.k = fields?.k ?? this.k;
   }
 
+  memoryVariables(): string[] {
+    return [this.memoryKey];
+  }
+
   async loadMemoryVariables(_values: InputValues): Promise<MemoryVariables> {
     if (this.returnMessages) {
       const result = {
